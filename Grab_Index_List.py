@@ -1,6 +1,6 @@
-import requests
 from bs4 import BeautifulSoup
 import os
+import requests
 
 if os.path.isfile('manga_list'):
     r = open('manga_list', 'r')
@@ -10,11 +10,12 @@ else:
     r.write(k.text)
     k.close()
 
-soup = BeautifulSoup(r.read() , 'html.parser')
+soup = BeautifulSoup(r.read(), 'html.parser')
 r.close()
 
 items = soup.findAll('a')
 item_dic = {}
+
 for i in items:
     try:
         lis = [i['href'], i.text]
@@ -27,7 +28,7 @@ def search_word(keyword):
             in key.lower()]
     for i, element in enumerate(search_list, 1):
         print('. '.join((str(i).zfill(2), element)))
-    print('----------')
+    print(5*'-')
     choser = int(input('select manga - '))-1
-    print('----------')
+    print(5*'-')
     return item_dic[search_list[choser]]
