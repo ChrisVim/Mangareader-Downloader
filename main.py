@@ -1,11 +1,11 @@
-import requests
 from bs4 import BeautifulSoup
-import os
 import Grab_Index_List
+import os
+import requests
 
 def fetch_chapter_names(mname):
     home = 'https://www.mangareader.net'
-    r = requests.get(''.join((home ,mname)))
+    r = requests.get(''.join((home, mname)))
     soup = BeautifulSoup(r.text, 'html.parser')
     r.close()
     ctable = soup.find('div',{'id':'chapterlist'}).table
