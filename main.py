@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-import te
+import Grab_Index_List
 
 def fetch_chapter_names(mname):
     home = 'https://www.mangareader.net'
