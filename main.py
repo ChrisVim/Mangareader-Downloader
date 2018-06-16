@@ -48,19 +48,20 @@ def create_folder(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-manga = input('which manga - ')
-print(50*'-')
-chosen = Grab_Index_List.search_word(manga)
-svol = int(input('which start chapter - '))
-evol = int(input('which end chapter - '))
-clen = [i for i in range(svol,evol+1)]
-chapter_names = fetch_chapter_names(chosen)
+if __name__ == "__main__":
+    manga = input('which manga - ')
+    print(50*'-')
+    chosen = Grab_Index_List.search_word(manga)
+    svol = int(input('which start chapter - '))
+    evol = int(input('which end chapter - '))
+    clen = [i for i in range(svol,evol+1)]
+    chapter_names = fetch_chapter_names(chosen)
 
-for i in clen:
+    for i in clen:
+        print(50*'-')
+        print(chapter_names[i-1])
+        print(50*'-')
+        links= fetch_page_links(chosen, i)
+        img_links = fetch_img_links(links)
+        down_imgs(img_links, manga ,chapter_names[i-1])
     print(50*'-')
-    print(chapter_names[i-1])
-    print(50*'-')
-    links= fetch_page_links(chosen, i)
-    img_links = fetch_img_links(links)
-    down_imgs(img_links, manga ,chapter_names[i-1])
-print(50*'-')
