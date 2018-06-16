@@ -7,7 +7,6 @@ def fetch_chapter_names(mname):
     home = 'https://www.mangareader.net'
     r = requests.get(''.join((home, mname)))
     soup = BeautifulSoup(r.text, 'html.parser')
-    r.close()
     ctable = soup.find('div',{'id':'chapterlist'}).table
     nctable = (ctable.findAll('td'))
     chapter_list = [table.text.strip() for table in nctable]
@@ -19,7 +18,6 @@ def fetch_page_links(mname, vol):
     home = 'https://www.mangareader.net'
     r = requests.get(''.join((home,mname,'/',str(vol))))
     soup = BeautifulSoup(r.text, 'html.parser')
-    r.close()
     chapters = [''.join((home, chapter['value'])) for chapter in soup.div.findAll('option')]
     return chapters
 
@@ -29,7 +27,6 @@ def fetch_img_links(page_links):
     for i,link in enumerate(page_links, 1):
         r = requests.get(link)
         soup = BeautifulSoup(r.text, 'html.parser')
-        r.close()
         img_links.append(soup.find('div', id='imgholder').a.img['src'])
         print(' / '.join(('fetching',str(i).zfill(2),str(clen).zfill(2))), end='\r'),
     return img_links
