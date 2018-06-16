@@ -1,15 +1,16 @@
 from bs4 import BeautifulSoup
 import os
 import requests
+import sys
 
-if os.path.isfile('manga_list'):
-    r = open('manga_list', 'r')
-else:
+if not os.path.isfile('manga_list'):
     k = requests.get('https://www.mangareader.net/alphabetical')
     r = open('manga_list', 'w+')
     r.write(k.text)
     k.close()
+    r.close()
 
+r = open('manga_list', 'r')
 soup = BeautifulSoup(r.read(), 'html.parser')
 r.close()
 
@@ -28,7 +29,7 @@ def search_word(keyword):
             in key.lower()]
     for i, element in enumerate(search_list, 1):
         print('. '.join((str(i).zfill(2), element)))
-    print(5*'-')
+    print(50*'-')
     choser = int(input('select manga - '))-1
-    print(5*'-')
+    print(50*'-')
     return item_dic[search_list[choser]]
