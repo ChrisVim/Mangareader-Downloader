@@ -44,25 +44,26 @@ def down_imgs(img_links, manga_name, chapter_name):
         with open(''.join((path,'/',str(i).zfill(2),'.jpg')), 'wb') as f:
             f.write(r.content)
         print(' / '.join(('downloading',str(i).zfill(2), str(dlen))), end='\r')
-    print('\nfinished')
+    print(50*'-')
+    print('finished')
 
 def create_folder(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
 manga = input('which manga - ')
-print(10*'-')
-chosen = te.search_word(manga)
+print(50*'-')
+chosen = Grab_Index_List.search_word(manga)
 svol = int(input('which start chapter - '))
 evol = int(input('which end chapter - '))
 clen = [i for i in range(svol,evol+1)]
 chapter_names = fetch_chapter_names(chosen)
 
 for i in clen:
-    print(10*'-')
+    print(50*'-')
     print(chapter_names[i-1])
-    print(10*'-')
+    print(50*'-')
     links= fetch_page_links(chosen, i)
     img_links = fetch_img_links(links)
     down_imgs(img_links, manga ,chapter_names[i-1])
-print(10*'-')
+print(50*'-')
