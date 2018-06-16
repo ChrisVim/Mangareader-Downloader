@@ -1,18 +1,14 @@
 from bs4 import BeautifulSoup
 import os
 import requests
-import sys
 
 if not os.path.isfile('manga_list'):
-    k = requests.get('https://www.mangareader.net/alphabetical')
-    r = open('manga_list', 'w+')
-    r.write(k.text)
-    k.close()
-    r.close()
+    with open ('manga_list', 'w') as r:
+        k = requests.get('https://www.mangareader.net/alphabetical')
+        r.write(k.text)
 
-r = open('manga_list', 'r')
-soup = BeautifulSoup(r.read(), 'html.parser')
-r.close()
+with open('manga_list', 'r') as r:
+    soup = BeautifulSoup(r.read(), 'html.parser')
 
 items = soup.findAll('a')
 item_dic = {}
